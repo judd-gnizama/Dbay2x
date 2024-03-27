@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dbay2x</title>
+        <link rel="stylesheet" href="styles.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+        <main>
+            <h1>Dbay2x</h1>
+            <span>A Bill Splitter Web App</span>
+            <div class="main-wrapper">
+                <div class="content-wrapper" id="member_content">
+                    <span class="content-title">Members</span>
+                    <!-- <p>Type names of members and click <strong>Add</strong></p> -->
+                    <input type="text" id="memberInput" placeholder="Enter Member Names Here">
+                    <div class="button-group">
+                        <button id="addMemberBtn">Add</button>
+                        <button id="clrMemberBtn">Clear All</button>
+                    </div>
+                    <ul class="table-list" id="members_table_list">
+                        <!-- Input elements here using JS -->
+                    </ul>
+                </div>
+                <div class="content-wrapper" id="transaction_content">
+                    <span class="content-title">Transactions</span>
+                    <div class="button-group">
+                        <button  class="greyed-out" id="addTransactionBtn">Add</button>
+                        <button  class="greyed-out" id="clrAllTransactionBtn">Clear All</button>
+                    </div>
+                    <div class="table">
+                        <ul class="table-headers" id="transaction_table_headers">
+                            <li>Description</li>
+                            <li>Amount</li>
+                            <li>Payer</li>
+                            <li>Split</li>
+                        </ul>
+                        <ul class="table-list" id="transaction_table_list">
+                            <!-- Add elements here using JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-wrapper" id="summary_content">
+                    <span class="content-title">Summary</span>
+                    <div class="button-group">
+                        <button class="hidden" id="calculateBtn">Calculate</button>
+                    </div>
+                    <div class="table">
+                        <span>Totals</span>
+                        <ul class="table-headers" id="summary_table_headers">
+                            <li>Member</li>
+                            <li>Total Spent</li>
+                            <li>Total Share</li>
+                            <li>Net Receivable</li>
+                        </ul>
+                        <ul class="table-list" id="summary_table_list">
+                            <!-- <li>
+                                <ul>
+                                    <li>Judd</li>
+                                    <li>P1500.00</li>
+                                    <li>P100.00</li>
+                                    <li>P1400.00</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul>
+                                    <li>Jyll</li>
+                                    <li>P200.00</li>
+                                    <li>P2100.00</li>
+                                    <li>-P1900.00</li>
+                                </ul>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <div class="table">
+                        <span>Reimbursements Needed</span>
+                        <ul class="table-list" id="reimbursement_table_list">
+                            <!-- <li>
+                                <ul>
+                                    <li>Judd</li>
+                                    <li><i class='bx bx-right-arrow-alt' ></i></li>
+                                    <li>Jon</li>
+                                    <li>P100.00</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <ul>
+                                    <li>Jyll</li>
+                                    <li><i class='bx bx-right-arrow-alt' ></i></li>
+                                    <li>Jon</li>
+                                    <li>P2000.00</li>
+                                </ul>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button>Backup Data</button>
+                    <button>Clear Data</button>
+                </div>
+            </div>
+        </main>
+        <div class="popups">
+            <div class="popup-menu-wrapper hidden" id="addTransactionPopupmenu">
+                <div class="content-wrapper">
+                    <span class="content-title">Add/Edit Transaction</span>
+                    <span id="transactionIdPopup"></span>
+                    <div>
+                        <label>Description: </label>
+                        <textarea id="descriptionPopup" cols="30" rows="3" placeholder="e.g. Transpo"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label >Amount:</label>
+                        <input id="amountPopup" type="number" placeholder="e.g. 2000.00">
+                    </div>
+                    <div>
+                        <label>Payer: </label>
+                        <select name="dropdown" id="payerPopup">
+                            <!-- <option value="Jon">Jon</option>
+                            <option value="Judd">Judd</option>
+                            <option value="Jyll">Jyll</option> -->
+                        </select>
+                    </div>
+                    <div>
+                        <label>Details: </label>
+                        <div class="radio-group">
+                            <input type="radio" name="split" value="evenly" id="1">
+                            <label for="1">Split Evenly</label> 
+                            <input type="radio" name="split" value="unevenly" id="2">
+                            <label for="2">Split Unevenly</label> 
+                        </div>
+                    </div>
+                    <div class="grid-input">
+                        <span>
+                            <input type="checkbox" name="selectAllMemberCheck" id="checkbox-0">
+                            <label for="checkbox-0">Toggle All</label>
+                        </span>
+                        <ul id="details_table">
+                            
+
+                            <!-- <li>
+                                <input type="checkbox" name="shareMemberCheck" id="checkbox-1">
+                                <label for="checkbox-1">Jyll</label> 
+                            </li>
+                            <li>
+                                <ul>
+                                    <li>
+                                        <label>Weight: </label> 
+                                        <input type="number" placeholder="1">
+                                    </li>
+                                    <li class="sharePercent">25%</li>
+                                    <li class="sharePercentage">P200000000.00</li>
+                                </ul>
+                            </li>
+                             -->
+                        </ul>
+                    </div>
+                    <div class="button-group">
+                        <button id="saveTransactionBtn_popup">Add Transaction</button>
+                        <button id="saveChangesBtn_popup" class="hidden">Save Changes</button>
+                        <button id="cancelBtn_popup">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="black-bg hidden" id="blackBg"></div>
+        </div>
+    </body>
+    <script src="main.js"></script>
+</html>
